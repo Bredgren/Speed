@@ -1,0 +1,45 @@
+
+- Mouse controls direction
+- Speed of pressing keys (or mouse button?) controls speed
+- Possible Goals
+    - Rush to the rescue
+    - Running away from something
+- Need bullets to out run
+
+Trouble:
+    - Robbers in get away van
+    - Car accident
+        - Sometimes on fire
+    - Mugging
+    
+Powers:
+    - Start with Super speed
+    - Super strength or Flight
+    - Laser vision or Shields
+    
+Actions determine if you are good/evil:
+    - if you are good
+        - you fight super villain bosses
+        - bad guys attack you
+    - if you are bad
+        - you fight super hero bosses
+        - cops/military attack you
+        
+File progress:
+    Cakefile: better errors, notifications
+    canvas: Most funcionality needed
+    config: Keep adding things as needed
+    main: Redo with new camera, canvas, assets, etc. (init camera with move_factor, config.fps, etc)
+    scene: Redo (see main)
+    + gamelib
+        camera: trigger update method
+        + assets
+            assetmanger: Redo, need sprite stuff
+        + geometry
+            circle: Everything
+            point: Done*
+            rect: Done*
+            size: Done*
+            util: Keep adding things as needed
+
+* no current changes planned

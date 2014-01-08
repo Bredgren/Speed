@@ -1,0 +1,33 @@
+
+fs = require 'fs'
+
+{print} = require 'sys'
+{exec} = require 'child_process'
+Rehab = require 'rehab'
+
+files = new Rehab().process './src'
+to_single_file = "--join js\\script.js"
+from_files = "--compile #{files.join ' '}"
+
+build = (callback) ->
+  coffee = exec "coffee #{to_single_file} #{from_files}"
+  # coffee = spawn 'coffee', ['-c', '-o', 'js', 'src']
+  coffee.stderr.on('data', (data) ->
+    process.stderr.write(data.toString()))
+
+  coffee.stdout.on('data', (data) ->
+    print(data.toString()))
+
+  coffee.on 'exit', (code) ->
+    callback?() if code is 0
+
+task 'build', 'Build js/ from src/', ->
+  build()
+
+task 'watch', 'Watch src/ for changes', ->
+  coffee = exec "coffee -w #{to_single_file} #from_files}"
+  coffee.stderr.on('data', (data) ->
+    process.stderr.write(data.toString()))
+
+  coffee.stdout.on('data', (data) ->
+    print(data.toString()))
