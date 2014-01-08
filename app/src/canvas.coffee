@@ -1,5 +1,5 @@
 
-#_require ./gamelib/geomotry/size
+#_require ./gamelib/geometry/size
 
 # A wrapper for a canvas that remembers where it has drawn and clears only
 # those places.

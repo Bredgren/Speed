@@ -1,7 +1,7 @@
 
 #_require ./gamelib/camera
 #_require ./gamelib/assets/assetmanager
-#_require ./gamelib/geomotry/point
+#_require ./gamelib/geometry/point
 
 class Background
   constructor: () ->

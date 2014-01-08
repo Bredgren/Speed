@@ -1,7 +1,7 @@
 
-#_require ./geomotry/point
-#_require ./geomotry/rect
-#_require ./geomotry/size
+#_require ./geometry/point
+#_require ./geometry/rect
+#_require ./geometry/size
 
 #TODO: trigger update method
 
