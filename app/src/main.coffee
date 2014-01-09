@@ -33,7 +33,6 @@ class Main
 
   onUpdate: () ->
     console.log('update')
-    camera.moveRight(0.25)
 
   onDraw: () ->
     img = config.img
@@ -43,8 +42,8 @@ class Main
     @_clearHud()
     @hud_ctx.font = "20px"
     @hud_ctx.fillStyle = "white"
-    @hud_ctx.fillText("x: #{camera.offset.x}", 0, 10)
-    @hud_ctx.fillText("y: #{camera.offset.y}", 0, 20)
+    @hud_ctx.fillText("x: #{camera.pos().x()}", 0, 10)
+    @hud_ctx.fillText("y: #{camera.pos().y()}", 0, 20)
 
     # street = assets.image(img.street2Lane)
     # street_y = @fgd_canvas.height - street.height
@@ -62,21 +61,21 @@ class Main
     @loadAssets()
     setInterval(@onUpdate, @FPS)
 
-    animFrame = window.requestAnimationFrame       or
-                window.webkitRequestAnimationFrame or
-                window.mozRequestAnimationFrame    or
-                window.oRequestAnimationFrame      or
-                window.msRequestAnimationFrame     or
-                null ;
+    @animFrame = window.requestAnimationFrame       or
+                 window.webkitRequestAnimationFrame or
+                 window.mozRequestAnimationFrame    or
+                 window.oRequestAnimationFrame      or
+                 window.msRequestAnimationFrame     or
+                 null
 
-    if animFrame isnt null
+    if @animFrame isnt null
       recursiveAnim = =>
         @onDraw()
-        animFrame(recursiveAnim)
+        @animFrame(recursiveAnim)
 
-      animFrame(recursiveAnim)
+      @animFrame(recursiveAnim)
     else
-      setInterval(onDraw, @FPS)
+      setInterval(@onDraw, @FPS)
 
   _setupCanvas: () ->
     @fgd_canvas.width = config.width

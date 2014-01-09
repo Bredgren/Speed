@@ -12,22 +12,22 @@ class Point
     return @_y
 
   plus: (other) ->
-    return new Point(@x + other.x, @y + other.y)
+    return new Point(@_x + other.x, @_y + other.y)
 
   minus: (other) ->
-    return new Point(@x - other.x, @y - other.y)
+    return new Point(@_x - other.x, @_y - other.y)
 
   times: (value) ->
-    return new Point(@x * value, @y * value)
+    return new Point(@_x * value, @_y * value)
 
   scaled: (scale) ->
-    return new Point(@x * scale.x, @y * scale.y)
+    return new Point(@_x * scale.x, @_y * scale.y)
 
   rounded: () ->
-    return new Point(round(@x), round(@y))
+    return new Point(round(@_x), round(@_y))
 
   copy: () ->
-    return new Point(@x, @y)
+    return new Point(@_x, @_y)
 
   toString: () ->
-    return "(#{@x}, #{@y})"
+    return "(#{@_x}, #{@_y})"

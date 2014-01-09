@@ -1,14 +1,14 @@
 
 #_require ./geometry/point
-#_require ./geometry/rect
+#_require ./geometry/rectangle
 #_require ./geometry/size
 
 #TODO: trigger update method
 
 class Camera
-  # @property The location of the camera in world space
   _pos: new Point()
 
+  # @property The possible movement types
   MOVE_MODE:
     INSTANT: 1                  # The camera is always at the target
     APPROACH: 2                 # The camera approaches the target
@@ -17,14 +17,14 @@ class Camera
 
   # Creates a new camera.
   #
-  # @param [Point] target The initial target coordinate (in world space)
-  # @param [Size] size The initial size
-  # @param [Number] move_factor Percent of distance to target to move each
+  # @param [Point] _target The initial target coordinate (in world space)
+  # @param [Size] _size The initial size
+  # @param [Number] _move_factor Percent of distance to target to move each
   #                             update
   constructor: (@_target=new Point(), @_size=new Size(), @_move_factor=1/10) ->
 
 
-  moveFactor: (@_move_factor) ->
+  moveFactor: (@_move_factor=@_move_factor) ->
     return @_move_factor
 
   # Sets or gets the size of the camera.
@@ -52,10 +52,11 @@ class Camera
   pos: () ->
     return @_pos.copy()
 
-  # Gets or sets the movement mode of the camera.
+  # Gets or sets the movement mode of the camera. Note that the parameter/return
+  # values should/will be from MOVE_MODE.
   #
-  # @param [MOVE_MODE] mode The desired mode
-  # @return [MOVE_MODE] The current move mode
+  # @param [Number] mode The desired mode
+  # @return [Number] The current move mode
   mode: (mode) ->
     if mode
       if mode > @_modes
@@ -83,22 +84,22 @@ class Camera
 
   # Converts the given rect specified in world space to screen space.
   #
-  # @param [Rect] world_rect Rect in world space
-  # @return [Rect] New Rect in screen space
+  # @param [Rectangle] world_rect Rect in world space
+  # @return [Rectangle] New Rect in screen space
   worldToScreenRect: (world_rect) ->
     world_pos = world_rect.topleft()
     screen_pos = worldToScreenPoint(world_pos)
-    screen_rect = Rect(screen_pos, world_rect.size())
+    screen_rect = new Rectangle(screen_pos, world_rect.size())
     return screen_rect
 
   # Converts the given rect specified in screen space to world space.
   #
-  # @param [Rect] screen_rect Rect in screen space
-  # @return [Rect] New Rect in world space
+  # @param [Rectangle] screen_rect Rect in screen space
+  # @return [Rectangle] New Rect in world space
   screenToWorldRect: (screen_rect) ->
     screen_pos = screen_rect.topleft()
     world_pos = screenToWorldPoint(screen_pos)
-    world_rect = Rect(world_pos, screen_rect.size())
+    world_rect = new Rectangle(world_pos, screen_rect.size())
     return world_rect
 
   # Takes screen coordinates and returns true if it is a point within view
@@ -125,9 +126,9 @@ class Camera
 
   # Updates the camera's position
   _update: () ->
-    if @_move is @MOVE_MODE.INSTANT
+    if @_mode is @MOVE_MODE.INSTANT
       @_pos = @_target.copy()
-    else if @_move is @MOVE_MODE.APPROACH
+    else if @_mode is @MOVE_MODE.APPROACH
       dir = @_target.minus(@_pos)
       @_pos = @_pos.plus(dir.times(@_move_factor))
 
