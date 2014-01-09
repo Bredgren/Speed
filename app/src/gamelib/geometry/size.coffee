@@ -1,21 +1,25 @@
 
 class Size
-  # @param [Number] _width The width
-  # @param [Number] _height The height
-  constructor: (@_width=0, @_height=0) ->
+  # @param [number] width The width
+  # @param [number] height The height
+  constructor: (width=0, height=0) ->
+    @_width = width
+    @_height = height
 
-  # Gets/sets the width.
+  # Get/set the width.
   #
-  # @param [Number] _width The new width
-  # @return [Number] The current width
-  width: (@_width=@_width) ->
+  # @param [number=] width The new width
+  # @return [number] The current width
+  width: (width) ->
+    @_width = width if width
     return @_width
 
-  # Gets/sets the height.
+  # Get/set the height.
   #
-  # @param [Number] _height The new height
-  # @return [Number] The current height
-  height: (@_height=@_height) ->
+  # @param [number=] height The new height
+  # @return [number] The current height
+  height: (height) ->
+    @_height = height if height
     return @_height
 
   # Returns a copy of this Size.

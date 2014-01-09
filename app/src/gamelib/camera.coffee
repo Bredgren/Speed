@@ -17,32 +17,37 @@ class Camera
 
   # Creates a new camera.
   #
-  # @param [Point] _target The initial target coordinate (in world space)
-  # @param [Size] _size The initial size
-  # @param [Number] _move_factor Percent of distance to target to move each
+  # @param [Point] target The initial target coordinate (in world space)
+  # @param [Size] size The initial size
+  # @param [number] move_factor Percent of distance to target to move each
   #                             update
-  constructor: (@_target=new Point(), @_size=new Size(), @_move_factor=1/10) ->
+  constructor: (target=new Point(), size=new Size(), move_factor=1/10) ->
+    @_target = target
+    @_size = size
+    @_move_factor = move_factor
 
-
-  moveFactor: (@_move_factor=@_move_factor) ->
+  # Get/set the move factor.
+  #
+  # @param [number=] move_factor The new move factor
+  # @return [number] The current move factor
+  moveFactor: (move_factor) ->
+    @_move_factor = move_factor if move_factor
     return @_move_factor
 
-  # Sets or gets the size of the camera.
+  # Get/set the size of the camera.
   #
-  # @param [Size] size The new size
+  # @param [Size=] size The new size
   # @return [Size] The current size
   size: (size) ->
-    if size
-      @_size = size.copy()
+    @_size = size.copy() if size
     return @_size.copy()
 
-  # Sets or gets the target position.
+  # Get/set the target position.
   #
-  # @param [Point] target The new target coordinate
+  # @param [Point=] target The new target coordinate
   # @return [Point] The current target position
   target: (target) ->
-    if target
-      @_target = target.copy()
+    @_target = target.copy() if target
     return @_target.copy()
 
   # Gets the camera's current position. If mode is INSTANT then this returns
@@ -52,11 +57,11 @@ class Camera
   pos: () ->
     return @_pos.copy()
 
-  # Gets or sets the movement mode of the camera. Note that the parameter/return
+  # Get/set the movement mode of the camera. Note that the parameter/return
   # values should/will be from MOVE_MODE.
   #
-  # @param [Number] mode The desired mode
-  # @return [Number] The current move mode
+  # @param [number=] mode The desired mode
+  # @return [number] The current move mode
   mode: (mode) ->
     if mode
       if mode > @_modes
@@ -106,10 +111,10 @@ class Camera
   # of the camera
   #
   # @param [Point] point Some screen coordinates
-  # @param [Boolean] world_space If true then the point's coordinates will
+  # @param [boolean] world_space If true then the point's coordinates will
   #                              be treated as world coordinates, otherwise
   #                              they will be treated as screen coordinates.
-  # @return [Boolean] true if the point is within view, false otherwise
+  # @return [boolean] true if the point is within view, false otherwise
   pointOnScreen: (point, world_space=false) ->
     if world_space
       point = @worldToScreenPoint(point)

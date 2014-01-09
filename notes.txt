@@ -27,19 +27,19 @@ Actions determine if you are good/evil:
         
 File progress:
     Cakefile: better errors, notifications
-    canvas: Most funcionality needed
+    canvas: Most funcionality needed, Document all
     config: Keep adding things as needed
-    main: Redo with new camera, canvas, assets, etc. (init camera with move_factor, config.fps, etc)
-    scene: Redo (see main)
+    main: Redo with new camera, canvas, assets, etc. (init camera with move_factor, config.fps, etc), Document all
+    scene: Redo (see main), Document all
     + gamelib
-        camera: trigger update method
+        camera: Trigger update method, Document class
         + assets
-            assetmanger: Redo, need sprite stuff
+            assetmanger: Redo, need sprite stuff, Document all
         + geometry
             circle: Everything
-            point: Done*
-            rect: Done*
-            size: Done*
+            point: Document all
+            rect: Document class
+            size: Document class
             util: Keep adding things as needed
 
 * no current changes planned

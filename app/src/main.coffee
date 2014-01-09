@@ -61,19 +61,19 @@ class Main
     @loadAssets()
     setInterval(@onUpdate, @FPS)
 
-    @animFrame = window.requestAnimationFrame       or
-                 window.webkitRequestAnimationFrame or
-                 window.mozRequestAnimationFrame    or
-                 window.oRequestAnimationFrame      or
-                 window.msRequestAnimationFrame     or
-                 null
+    window.animFrame = window.requestAnimationFrame       or
+                       window.webkitRequestAnimationFrame or
+                       window.mozRequestAnimationFrame    or
+                       window.oRequestAnimationFrame      or
+                       window.msRequestAnimationFrame     or
+                       null
 
-    if @animFrame isnt null
+    if animFrame isnt null
       recursiveAnim = =>
         @onDraw()
-        @animFrame(recursiveAnim)
+        window.animFrame(recursiveAnim)
 
-      @animFrame(recursiveAnim)
+      window.animFrame(recursiveAnim)
     else
       setInterval(@onDraw, @FPS)
 
